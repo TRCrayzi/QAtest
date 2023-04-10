@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h4>Selenium PageObjects + OOP Test page</h4>
+<table style="height: 54px; width: 98.7216%; border-collapse: collapse;" border="1" cellpadding="5">
+<tbody>
+<tr style="height: 10px;">
+<td style="width: 50%; height: 10px;"><strong>Vehicle Data</strong></td>
+<td style="width: 50%; height: 10px;"><strong>Cloned Vehicle</strong></td>
+</tr>
+<tr style="height: 44px;">
+<td style="width: 50%; height: 44px;">
+<div id="model1">
+<p><strong>Name&nbsp;</strong><input class="js-name" type="text" /></p>
+<p><strong>Model&nbsp;</strong><select class="js-model">
+<option value="">Select Model</option>
+<option value="BMW">BMW</option>
+<option value="Mazda">Mazda</option>
+</select></p>
+<p><strong>Year&nbsp;</strong><input class="js-year" type="text" /></p>
+</div>
+</td>
+<td style="width: 50%; height: 44px;">
+<div id="model2">
+<p><strong>Name&nbsp;</strong><input readonly class="js-name" type="text" /></p>
+<p><strong>Model&nbsp;</strong><select disabled class="js-model">
+<option value=""></option>
+<option value="BMW">BMW</option>
+<option value="Mazda">Mazda</option>
+</select></p>
+<p><strong>Color&nbsp;</strong><input readonly class="js-color" type="text" /></p>
+<p><strong>Year&nbsp;</strong><input readonly class="js-year" type="text" /></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>New Vehicle Color&nbsp;</strong><select id="vehColor">
+<option value="White">White</option>
+<option value="Red">Red</option>
+<option value="Blue">Blue</option>
+</select></p>
+<p><button id="cloneVehicle">Clone Vehicle with Color</button></p>
+
+
+<script>
+	function createVehicle(){
+		$("#model2 .js-name").val($("#model1 .js-name").val());
+		$("#model2 .js-model").val($("#model1 .js-model").val());
+		$("#model2 .js-year").val($("#model1 .js-year").val());
+		$("#model2 .js-color").val($("#vehColor").val());
+	}
+
+	$(document).ready(function(){
+	  $("#cloneVehicle").click(function(){
+		createVehicle();
+	  });
+	});
+
+</script>
+
+<br>
+<br>
+<hr>
+<pre>
+Test Case 1
+1. Fill Vehicle Data fields
+1.1 Name = Vehicle 1
+1.2 Model = BMW
+1.2 Year = 2020
+2. Select 'New Vehicle Color' as Red
+3. Click on 'Clone Vehicle with Color'
+Expected Result:
+Section 'Cloned Vehicle' should be populated with entered data 
+</pre>
+
+<pre>
+Test Case 2
+1. Fill Vehicle Data fields
+1.1 Name = Vehicle 1
+1.2 Model = BMW
+1.2 Year = 2020
+2. Change model to Mazda
+2. Select 'New Vehicle Color' as Red
+3. Click on 'Clone Vehicle with Color'
+Expected Result:
+Section 'Cloned Vehicle' should be populated with entered data 
+</pre>
+<hr>
+<h3>
+Task:  Create automation tests for checking 2 testcases descibed above.
+</h3>
+<b>Requirements:</b><br>
+1. No code duplication<br>
+2. Use PageObject pattern<br>
+3. Use OOP principes<br>
+<hr>
+
+</body>
+</html>
+
