@@ -1,7 +1,6 @@
 package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -19,22 +18,16 @@ public class Main {
         String baseUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\AQA_Test_Task.html";
 
         driver.get(baseUrl);
-        WebElement selectModel = driver.findElement(By.xpath("//*[@id='model1']/p[2]/select"));
-        String[] Models = selectModel.findElements(By.tagName("option"))
-                .stream()
-                .map(WebElement::getText)
-                .toArray(String[]::new);
 
-        WebElement selectColor = driver.findElement(By.xpath("//*[@id=\"vehColor\"]"));
-        String[] Colors = selectColor.findElements(By.tagName("option"))
-                .stream()
-                .map(WebElement::getText)
-                .toArray(String[]::new);
 
         TestPage testpage =new TestPage(driver);
 
+        String[] Models = testpage.findObjects(By.xpath("//*[@id='model1']/p[2]/select"));
+
+        String[] Colors = testpage.findObjects(By.xpath("//*[@id=\"vehColor\"]"));
+
         //Task 1
-        //test
+        //test ResultPage
         Thread.sleep(500);
         testpage.TestInput("Vehicle 1", Models[1], Colors[1], "2020");
 
@@ -46,8 +39,8 @@ public class Main {
         Thread.sleep(500);
         testpage.TestModification("Vehicle 1", Models, Colors[1], "2020");
 
-        Thread.sleep(10000);
-        driver.quit();
+        //Thread.sleep(10000);
+        //driver.quit();
 
     }
 }

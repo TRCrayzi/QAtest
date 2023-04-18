@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestPage {
-    private WebDriver driver;
+public class TestPage extends ResultPage{
+    //private WebDriver driver;
 
     private final By CName = By.xpath("//input[@class=\"js-name\"]");
     private final By CModel = By.xpath("//*[@id='model1']/p[2]/select");
@@ -16,12 +16,13 @@ public class TestPage {
     private final By CClone = By.xpath("//*[@id=\"cloneVehicle\"]");
 
     public TestPage(WebDriver driver) {
-        this.driver = driver;
+        //this.driver = driver;
+        super(driver);
     }
 
     public void EnterCName(String Name) {
         driver.findElement(CName).sendKeys(Name, Keys.ENTER);
-    }
+}
 
     public void ChooseCModel(String Model) {
         driver.findElement(CModel).click();
@@ -62,13 +63,13 @@ public class TestPage {
         ChooseCModel(Models[2]);
         ChooseCColor(Color);
         ClickCClone();
-        Asserts( Name, Models[2], Color, Year);
+        Asserts( Name, Models[2], Color, Year );
     }
 
     public void Asserts(String Name, String Model, String Color, String Year) {
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"model2\"]/p[1]/input")).getAttribute("value"), Name );
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"model2\"]/p[2]/select")).getAttribute("value"),Model );
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"model2\"]/p[3]/input")).getAttribute("value"),Color );
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"model2\"]/p[4]/input")).getAttribute("value"),Year );
+        Assert.assertEquals(getTName().getAttribute("value"), Name );
+        Assert.assertEquals(getTModel().getAttribute("value"),Model );
+        Assert.assertEquals(getTColor().getAttribute("value"),Color );
+        Assert.assertEquals(getTYear().getAttribute("value"),Year );
     }
 }
